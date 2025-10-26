@@ -153,13 +153,3 @@ const char* serverIP = "192.168.1.100";
 ## 📄 Licencia
 
 MIT License - Ver archivo `LICENSE`
-
-## 👥 Autores
-
-Tu equipo aquí
-
-## 🙏 Agradecimientos
-
-- Documentación de ESP32
-- Comunidad de Socket.IO
-- React Team
