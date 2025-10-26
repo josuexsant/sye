@@ -1,0 +1,96 @@
+/* Estilos principales de la aplicación */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.App-header h1 {
+  color: #333;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.App-content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 300px 1fr 350px;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.left-panel,
+.center-panel,
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .App-content {
+    grid-template-columns: 280px 1fr 300px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .App-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .left-panel {
+    order: 1;
+  }
+
+  .center-panel {
+    order: 3;
+  }
+
+  .right-panel {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .App-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .App-content {
+    padding: 10px;
+    gap: 10px;
+  }
+}

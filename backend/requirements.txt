@@ -1,0 +1,8 @@
+# Servidor WebSocket para Serpientes y Escaleras
+# Python 3.8+
+
+# WebSocket server
+websockets==12.0
+
+# Utilidades
+python-dotenv==1.0.0

@@ -1,0 +1,133 @@
+# ===================================
+# GITIGNORE GLOBAL DEL PROYECTO
+# ===================================
+
+# ============= PYTHON =============
+# Backend
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/*.so
+backend/.Python
+backend/build/
+backend/develop-eggs/
+backend/dist/
+backend/downloads/
+backend/eggs/
+backend/.eggs/
+backend/lib/
+backend/lib64/
+backend/parts/
+backend/sdist/
+backend/var/
+backend/wheels/
+backend/pip-wheel-metadata/
+backend/share/python-wheels/
+backend/*.egg-info/
+backend/.installed.cfg
+backend/*.egg
+backend/MANIFEST
+backend/.env
+backend/venv/
+backend/env/
+backend/ENV/
+backend/env.bak/
+backend/venv.bak/
+
+# ============= NODE / REACT =============
+# Frontend
+frontend/node_modules/
+frontend/.pnp
+frontend/.pnp.js
+frontend/coverage/
+frontend/build/
+frontend/.DS_Store
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.eslintcache
+
+# ============= ESP32 / ARDUINO =============
+# ESP32
+esp32/.pio/
+esp32/.vscode/
+esp32/build/
+esp32/*.bin
+esp32/*.hex
+esp32/*.elf
+esp32/*.map
+
+# ============= IDEs =============
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ============= OS =============
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ============= LOGS =============
+*.log
+logs/
+*.log.*
+
+# ============= OTROS =============
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# Certificados y claves
+*.pem
+*.key
+*.crt
+*.p12
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Backups
+*.backup
+backup/
+
+# Archivos de configuración local
+config.local.*
+.env.local

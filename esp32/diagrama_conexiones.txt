@@ -1,0 +1,168 @@
+╔════════════════════════════════════════════════════════════════╗
+║         DIAGRAMA DE CONEXIONES ESP32                           ║
+║         Serpientes y Escaleras IoT                             ║
+╚════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────┐
+│                         ESP32 DEVKIT                            │
+│                                                                 │
+│  3V3  ─────────────────────────────────────────────── +3.3V    │
+│  GND  ─────────────────────────────────────────────── GND      │
+│                                                                 │
+│  GPIO 12 ───[Botón 1]─── GND          (Jugador 1)              │
+│  GPIO 13 ───[Botón 2]─── GND          (Jugador 2)              │
+│  GPIO 14 ───[Botón 3]─── GND          (Jugador 3)              │
+│  GPIO 15 ───[Botón 4]─── GND          (Jugador 4)              │
+│                                                                 │
+│  GPIO 16 ───[220Ω]───[LED 1>]─── GND  (Indicador J1)           │
+│  GPIO 17 ───[220Ω]───[LED 2>]─── GND  (Indicador J2)           │
+│  GPIO 18 ───[220Ω]───[LED 3>]─── GND  (Indicador J3)           │
+│  GPIO 19 ───[220Ω]───[LED 4>]─── GND  (Indicador J4)           │
+│                                                                 │
+│  GPIO 25 ───[Buzzer +]                (Sonidos)                │
+│         └── [Buzzer -]─── GND                                  │
+│                                                                 │
+│  GPIO 26 ───[Servo 1 Signal]          (Opcional)               │
+│  GPIO 27 ───[Servo 2 Signal]          (Opcional)               │
+│                                                                 │
+│  VIN ─────── +5V (Fuente externa si usas servos)               │
+│  EN ──────── (Reset, dejar abierto)                            │
+└─────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════
+DETALLES DE CONEXIÓN
+═══════════════════════════════════════════════════════════════════
+
+┌─ BOTONES (x4) ────────────────────────────────────────────────┐
+│                                                                │
+│   ESP32 GPIO 12/13/14/15                                       │
+│        │                                                       │
+│        └─── [Botón] ─── GND                                   │
+│                                                                │
+│   Nota: Se usa INPUT_PULLUP interno, no requiere              │
+│         resistencia pull-up externa                           │
+│                                                                │
+│   Estado normal: HIGH (3.3V)                                  │
+│   Presionado: LOW (0V)                                        │
+└────────────────────────────────────────────────────────────────┘
+
+┌─ LEDs (x4) ───────────────────────────────────────────────────┐
+│                                                                │
+│   ESP32 GPIO 16/17/18/19                                       │
+│        │                                                       │
+│        └─── [Resistencia 220Ω] ─── [LED Ánodo (+)]           │
+│                                         │                      │
+│                                    [LED Cátodo (-)]           │
+│                                         │                      │
+│                                        GND                     │
+│                                                                │
+│   Colores sugeridos:                                          │
+│   - LED 1: Rojo    (Jugador 1)                               │
+│   - LED 2: Azul    (Jugador 2)                               │
+│   - LED 3: Verde   (Jugador 3)                               │
+│   - LED 4: Amarillo (Jugador 4)                              │
+│                                                                │
+│   Nota: La pata larga del LED es el ánodo (+)                 │
+└────────────────────────────────────────────────────────────────┘
+
+┌─ BUZZER ──────────────────────────────────────────────────────┐
+│                                                                │
+│   ESP32 GPIO 25                                                │
+│        │                                                       │
+│        └─── [Buzzer +] (Terminal positivo)                    │
+│                                                                │
+│        GND ─── [Buzzer -] (Terminal negativo)                 │
+│                                                                │
+│   Tipos de buzzer:                                            │
+│   - Activo: Hace sonido al recibir voltaje                    │
+│   - Pasivo: Requiere señal PWM para frecuencias               │
+│                                                                │
+│   El código usa buzzer pasivo (permite melodías)              │
+└────────────────────────────────────────────────────────────────┘
+
+┌─ SERVOS (Opcional) ───────────────────────────────────────────┐
+│                                                                │
+│   Servo 1:                      Servo 2:                      │
+│   ┌────────┐                    ┌────────┐                    │
+│   │ Marrón │ ─── GND            │ Marrón │ ─── GND           │
+│   │ Rojo   │ ─── 5V             │ Rojo   │ ─── 5V            │
+│   │ Naranja│ ─── GPIO 26        │ Naranja│ ─── GPIO 27       │
+│   └────────┘                    └────────┘                    │
+│                                                                │
+│   ⚠️  IMPORTANTE:                                              │
+│   Los servos consumen mucha corriente (~500mA bajo carga)     │
+│   NO conectar directamente al pin 5V del ESP32                │
+│   Usar fuente externa 5V 2A+ con GND común                    │
+│                                                                │
+│   Conexión con fuente externa:                                │
+│   ESP32 GND ─┬─ Servo GND                                     │
+│              └─ Fuente GND                                    │
+│                                                                │
+│   Fuente 5V ──── Servo VCC                                    │
+│   ESP32 GPIO 26/27 ──── Servo Signal                          │
+└────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════
+ALIMENTACIÓN
+═══════════════════════════════════════════════════════════════════
+
+┌─ OPCIÓN 1: USB (Desarrollo) ──────────────────────────────────┐
+│                                                                │
+│   Computadora USB ──── ESP32 Micro-USB                        │
+│                                                                │
+│   ✅ Suficiente para: Botones, LEDs, Buzzer                   │
+│   ❌ NO suficiente para: Servomotores                         │
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
+
+┌─ OPCIÓN 2: Fuente Externa (Producción) ───────────────────────┐
+│                                                                │
+│   Fuente 5V 2A ──┬── ESP32 VIN                                │
+│                  └── GND común                                │
+│                                                                │
+│   ✅ Para proyecto completo con servos                        │
+│   ⚠️  NO conectar a 3.3V (solo acepta 3.3V)                   │
+│      Usar VIN que regula internamente                         │
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════
+LISTA DE MATERIALES
+═══════════════════════════════════════════════════════════════════
+
+Cantidad  │  Componente                │  Especificación
+──────────┼────────────────────────────┼─────────────────────────
+    1     │  ESP32 Dev Board           │  Cualquier modelo WiFi
+    4     │  Botones pulsadores        │  Normalmente abierto
+    4     │  LEDs                      │  5mm, varios colores
+    4     │  Resistencias              │  220Ω (rojo-rojo-café)
+    1     │  Buzzer                    │  Pasivo 5V
+    1     │  Protoboard                │  830 puntos mínimo
+   20+    │  Cables jumper             │  Macho-macho
+    2     │  Servomotores (opcional)   │  SG90 o similar
+    1     │  Fuente 5V (opcional)      │  2A si usas servos
+
+
+═══════════════════════════════════════════════════════════════════
+NOTAS DE SEGURIDAD
+═══════════════════════════════════════════════════════════════════
+
+⚠️  ADVERTENCIAS:
+  • No conectar 5V directo a pines GPIO (max 3.3V)
+  • No sobrepasar 40mA por pin GPIO
+  • Usar resistencias con LEDs (protección)
+  • GND común en todas las conexiones
+  • Desconectar alimentación antes de modificar circuito
+  • Verificar polaridad de componentes
+
+✅ BUENAS PRÁCTICAS:
+  • Usar cables de colores (rojo=VCC, negro=GND)
+  • Etiquetar conexiones
+  • Probar componentes individuales primero
+  • Medir voltajes con multímetro
+  • Documentar cambios
+
+═══════════════════════════════════════════════════════════════════
